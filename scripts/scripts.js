@@ -14,6 +14,37 @@ import {
 } from './aem.js';
 
 /**
+ * Zona personalizada
+ */
+
+const doFoo = ({ detail: payload }) => {
+  console.log('something happened', payload);
+  // your custom code goes here
+};
+
+const sk = document.querySelector('aem-sidekick');
+if (sk) {
+  // sidekick already loaded
+  sk.addEventListener('sidekick-ready', doFoo);
+} else {
+  // wait for sidekick to be loaded
+  document.addEventListener('sidekick-ready', () => {
+    // sidekick now loaded
+    document.querySelector('aem-sidekick')
+      .addEventListener('sidekick-ready', doFoo);
+  }, { once: true });
+}
+
+
+
+/**
+ * Fin de la zona personalizada
+ */
+
+
+
+
+/**
  * Builds hero block and prepends to main in a new section.
  * @param {Element} main The container element
  */
